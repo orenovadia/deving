@@ -11,5 +11,6 @@ setup(
     install_requires=[
         'click',
         'tqdm',
+        'enum34',
     ]
 )

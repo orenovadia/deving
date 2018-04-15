@@ -5,7 +5,7 @@ from sys import stdin
 import click
 from tqdm import tqdm
 
-from deving.lib.traceback_extractor import TracebackExtractor
+from deving.traceback_extractor import TracebackExtractor
 
 
 @contextmanager

@@ -4,7 +4,6 @@ setup(
     name='deving',
     packages=[
         'deving',
-        'deving.lib',
     ],
     version='0.1.0',
     description='Some dev tools',

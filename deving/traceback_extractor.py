@@ -6,7 +6,6 @@ from enum import Enum
 class State(Enum):
     nothing = 1
     in_trace = 2
-    ended_trace = 3
 
 
 class TraceSink(object):
@@ -31,16 +30,17 @@ class TracebackExtractor(object):
 
     def feed_lines(self, lines):
         for line in lines:
-            possible_trace = self._fead_line(line)
+            possible_trace = self._feed_line(line)
             if possible_trace:
                 yield possible_trace
 
-    def _fead_line(self, line):
+    def _feed_line(self, line):
         if self.state is State.nothing and line.startswith('Traceback'):
             self.state = State.in_trace
             self._new_sink()
             self.sink.feed_line(line)
             return None
+
         elif self.state is State.in_trace:
             self.sink.feed_line(line)
             if error_pat.match(line):

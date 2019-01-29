@@ -11,13 +11,15 @@ setup(
     author_email='orenovad@gmail.com',
     url='https://github.com/orenovadia/deving',
     install_requires=[
-        'click',
-        'tqdm',
-        'enum34',
+        req.strip()
+        for req in open('requirements.txt')
     ],
     entry_points={
         'console_scripts': [
-            'deving_tracebacks = deving.main:find_exceptions',
+            'dev-main = deving.main:main',
+            'dev-tracebacks = deving.main:find_exceptions',
+            'dev-histogram = deving.main:histogram',
+            'dev-urlencode = deving.main:encode_parameters',
         ],
     }
 )

@@ -1,3 +1,5 @@
 click
 tqdm
 enum34
+matplotlib
+pandas

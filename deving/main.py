@@ -53,7 +53,7 @@ def histogram(from_file):
     matplotlib.pyplot.show()
 
 
-@main.command(short_help='Encode lines of input files as url parameters')
+@main.command(short_help='Encode lines of input file as url parameters')
 @click.argument(
     'from_file',
     type=click.Path(exists=False, file_okay=True, dir_okay=False, resolve_path=False),

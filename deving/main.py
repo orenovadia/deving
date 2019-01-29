@@ -56,7 +56,7 @@ def histogram(from_file):
 @main.command(short_help='Encode lines of input files as url parameters')
 @click.argument(
     'from_file',
-    type=click.Path(exists=True, file_okay=True, dir_okay=False, resolve_path=False),
+    type=click.Path(exists=False, file_okay=True, dir_okay=False, resolve_path=False),
     required=False
 )
 @click.argument(
@@ -81,7 +81,10 @@ def _null_context(argument=None):
 
 
 def _file_context(file_name):
-    return open(file_name) if file_name else _null_context(stdin)
+    if file_name is None or file_name == '-':
+        return _null_context(stdin)
+    else:
+        return open(file_name)
 
 
 if __name__ == '__main__':

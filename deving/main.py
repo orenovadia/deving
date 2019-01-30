@@ -1,3 +1,5 @@
+from __future__ import print_function
+
 import csv
 from collections import Counter
 from urllib import urlencode
@@ -30,8 +32,8 @@ def find_exceptions(log_file, top_n):
         tracebacks = TracebackExtractor().feed_lines(tqdm(f))
         c = Counter(tracebacks)
         for trace, amount in reversed(c.most_common(top_n)):
-            print ('------- {} '.format(amount))
-            print (trace)
+            print('------- {} '.format(amount))
+            print(trace)
 
 
 @main.command(name='histogram',

@@ -1,3 +1,5 @@
+from __future__ import print_function
+
 import re
 
 from enum import Enum
@@ -56,4 +58,4 @@ class TracebackExtractor(object):
 if __name__ == '__main__':
     t = TracebackExtractor()
     for i in t.feed_lines(['Traceback\n', 'bar\n', 'FooError:a\n']):
-        print '------', i, '----'
+        print('------', i, '----')

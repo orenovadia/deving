@@ -1,3 +1,5 @@
+from __future__ import print_function
+
 from collections import Counter
 from threading import Thread
 from time import sleep
@@ -24,7 +26,7 @@ def counts(from_file):
     def update_progress():
         while True:
             sleep(5)
-            print c
+            print(c)
 
     with file_context(from_file) as f:
 
@@ -33,8 +35,8 @@ def counts(from_file):
         t.start()
 
         c.update(f)
-    for item, count in c.iteritems():
-        print item.strip(), count
+    for item, count in c.items():
+        print(item.strip(), count)
 
 
 if __name__ == '__main__':

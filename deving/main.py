@@ -2,7 +2,13 @@ from __future__ import print_function
 
 import csv
 from collections import Counter
-from urllib import urlencode
+
+try:
+    # Py2
+    from urllib import urlencode
+except ImportError:
+    # Py3
+    from urllib.parse import urlencode
 
 import click
 from tqdm import tqdm

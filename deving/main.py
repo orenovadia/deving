@@ -21,11 +21,15 @@ def main():
     type=click.Path(exists=True, file_okay=True, dir_okay=False, resolve_path=False),
     required=False
 )
-def find_exceptions(log_file):
+@click.option(
+    '--top-n',
+    default=10
+)
+def find_exceptions(log_file, top_n):
     with (_file_context(log_file)) as f:
         tracebacks = TracebackExtractor().feed_lines(tqdm(f))
         c = Counter(tracebacks)
-        for trace, amount in reversed(c.most_common(10)):
+        for trace, amount in reversed(c.most_common(top_n)):
             print ('------- {} '.format(amount))
             print (trace)
 

@@ -1,13 +1,13 @@
 import csv
 from collections import Counter
-from contextlib import contextmanager
-from sys import stdin
 from urllib import urlencode
 
 import click
 from tqdm import tqdm
 
+from deving.line_counts import counts
 from deving.traceback_extractor import TracebackExtractor
+from deving.utils import file_context
 
 
 @click.group('main')
@@ -26,7 +26,7 @@ def main():
     default=10
 )
 def find_exceptions(log_file, top_n):
-    with (_file_context(log_file)) as f:
+    with (file_context(log_file)) as f:
         tracebacks = TracebackExtractor().feed_lines(tqdm(f))
         c = Counter(tracebacks)
         for trace, amount in reversed(c.most_common(top_n)):
@@ -44,7 +44,7 @@ def find_exceptions(log_file, top_n):
 def histogram(from_file):
     import pandas as pd
     import matplotlib
-    with _file_context(from_file) as f:
+    with file_context(from_file) as f:
         df = (pd
               .read_csv(f, names=['name'], quoting=csv.QUOTE_NONE)
               .groupby('name')
@@ -74,22 +74,12 @@ def histogram(from_file):
     required=True
 )
 def encode_parameters(from_file, url, parameter_name):
-    with _file_context(from_file) as f:
+    with file_context(from_file) as f:
         for row in f:
             print(url + "?" + urlencode({parameter_name: row.strip()}))
 
 
-@contextmanager
-def _null_context(argument=None):
-    yield argument
-
-
-def _file_context(file_name):
-    if file_name is None or file_name == '-':
-        return _null_context(stdin)
-    else:
-        return open(file_name)
-
+main.add_command(counts, 'counts')
 
 if __name__ == '__main__':
     main()

@@ -7,14 +7,18 @@ import click
 from deving.utils import file_context
 
 
-@click.command(name='counts',
-               short_help='Perform O(N) unique counts with reports along the way')
+@click.command(name='counts')
 @click.argument(
     'from_file',
     type=click.Path(exists=True, file_okay=True, dir_okay=False, resolve_path=False),
     required=False
 )
 def counts(from_file):
+    """
+    Perform O(N) unique counts with reports along the way
+    Example:
+        $ seq 3 | dev-counts
+    """
     c = Counter()
 
     def update_progress():

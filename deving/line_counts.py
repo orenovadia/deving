@@ -34,9 +34,10 @@ def counts(from_file):
         t.setDaemon(True)
         t.start()
 
-        c.update(f)
+        c.update(r.strip() for r in f)
+
     for item, count in c.items():
-        print(item.strip(), count)
+        print(item, count)
 
 
 if __name__ == '__main__':

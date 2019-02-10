@@ -21,6 +21,7 @@ setup(
             'dev-histogram = deving.main:histogram',
             'dev-urlencode = deving.main:encode_parameters',
             'dev-counts = deving.line_counts:counts',
+            'dev-pstats-merge = deving.pstats_merge:pstats_merge',
         ],
     }
 )

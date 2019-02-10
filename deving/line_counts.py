@@ -6,8 +6,6 @@ from time import sleep
 
 import click
 
-from deving.utils import file_context
-
 
 @click.command(name='counts')
 @click.argument(
@@ -28,7 +26,7 @@ def counts(from_file):
             sleep(5)
             print(c)
 
-    with file_context(from_file) as f:
+    with click.open_file(from_file or '-') as f:
 
         t = Thread(target=update_progress)
         t.setDaemon(True)
